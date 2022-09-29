@@ -9,7 +9,7 @@ class ListerToClipboard extends WireData implements Module {
 		return array(
 			'title' => 'Lister To Clipboard',
 			'summary' => 'Easily copy a selector for the current Lister filters or selected results to the clipboard.',
-			'version' => '0.1.0',
+			'version' => '0.1.1',
 			'author' => 'Robin Sallis',
 			'href' => 'https://github.com/Toutouwai/ListerToClipboard',
 			'icon' => 'fa-files-o',

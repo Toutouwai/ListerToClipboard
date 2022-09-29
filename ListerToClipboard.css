@@ -7,7 +7,8 @@ td.ltc-selected {
   width: max-content;
   max-width: 100%;
   font-size: 14px;
-  line-height: 17px; }
+  line-height: 17px;
+  margin-bottom: 20px; }
 
 .ltc-row {
   display: flex;
