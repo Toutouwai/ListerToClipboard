@@ -1,0 +1,55 @@
+td.ltc-selected {
+  background-color: #eefeec; }
+
+#ltc-container {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 17px; }
+
+.ltc-row {
+  display: flex;
+  align-items: center; }
+
+.ltc-button {
+  padding: 7px 0 7px 10px; }
+  .ltc-button button {
+    border: 0;
+    background: none;
+    padding: 0;
+    text-align: center;
+    width: 30px;
+    height: 22px;
+    display: block;
+    cursor: pointer;
+    opacity: 0.5; }
+    .ltc-button button:hover {
+      opacity: 1; }
+    .ltc-button button i {
+      font-size: 22px; }
+  .ltc-button #ltc-selection-clear {
+    color: #51c443; }
+  .ltc-button #ltc-selector-copy {
+    color: #2c84ca; }
+
+.ltc-value {
+  padding: 7px 15px 7px 10px; }
+
+#ltc-selection {
+  background-color: #eefeec;
+  border: 1px solid #b8f1b2;
+  border-bottom: 0;
+  border-radius: 5px 5px 0 0;
+  display: none; }
+  #ltc-selection.has-selection {
+    display: flex; }
+
+#ltc-selector {
+  background-color: #ecf6fe;
+  border: 1px solid #c8e7ff;
+  border-radius: 5px; }
+
+#ltc-selection.has-selection + #ltc-selector {
+  border-radius: 0 0 5px 5px; }

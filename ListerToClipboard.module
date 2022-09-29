@@ -1,0 +1,87 @@
+<?php namespace ProcessWire;
+
+class ListerToClipboard extends WireData implements Module {
+
+	/**
+	 * Module information
+	 */
+	public static function getModuleInfo() {
+		return array(
+			'title' => 'Lister To Clipboard',
+			'summary' => 'Easily copy a selector for the current Lister filters or selected results to the clipboard.',
+			'version' => '0.1.0',
+			'author' => 'Robin Sallis',
+			'href' => 'https://github.com/Toutouwai/ListerToClipboard',
+			'icon' => 'fa-files-o',
+			'autoload' => 'template=admin',
+			'requires' => 'ProcessWire>=3.0.0, PHP>=5.4.0',
+		);
+	}
+
+	/**
+	 * Ready
+	 */
+	public function ready() {
+		if(!$this->wire()->user->isSuperuser()) return;
+		$this->addHookBefore('ProcessPageLister::execute', $this, 'beforeListerExecute');
+		$this->addHookAfter('ProcessPageLister::renderResults', $this, 'afterRenderResults');
+	}
+
+	/**
+	 * Before ProcessPageLister::execute
+	 * Add assets
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function beforeListerExecute(HookEvent $event) {
+		$config = $this->wire()->config;
+		// Load assets
+		$info = $this->getModuleInfo();
+		$version = $info['version'];
+		$config->styles->add($config->urls->{$this} . "{$this}.css?v={$version}");
+		$config->scripts->add($config->urls->{$this} . "{$this}.js?v={$version}");
+	}
+
+	/**
+	 * After ProcessPageLister::renderResults
+	 * Add markup
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function afterRenderResults(HookEvent $event) {
+		/** @var ProcessPageLister $lister */
+		$lister = $event->object;
+		$selector_str = $lister->getSelector();
+		// Don't include any limit
+		$selectors = new Selectors($selector_str);
+		$s_limit = $selectors->get("field=limit");
+		if($s_limit) $selectors->remove($s_limit);
+		$selector_str = (string) $selectors;
+		$labels = [
+			'selection_label' => $this->_('manually selected'),
+			'clear' => $this->_('Clear selection'),
+			'copy' => $this->_('Copy selector'),
+		];
+		// Add markup
+		$event->return .= <<<EOT
+<input type="hidden" id="ltc-original-selector" value="$selector_str">
+<div id="ltc-container">
+	<div id="ltc-selection" class="ltc-row">
+		<div class="ltc-button">
+			<button id="ltc-selection-clear" uk-tooltip="{$labels['clear']}"><i class="fa fa-fw fa-times-circle"></i></button>
+		</div>
+		<div id="ltc-selection-label" class="ltc-value">
+			<span id="ltc-selection-count">0</span> {$labels['selection_label']}
+		</div>
+	</div>
+	<div id="ltc-selector" class="ltc-row">
+		<div class="ltc-button">
+			<button id="ltc-selector-copy" uk-tooltip="{$labels['copy']}"><i class="fa fa-fw fa-files-o"></i></button>
+		</div>
+		<div id="ltc-selector-string" class="ltc-value">$selector_str</div>
+	</div>
+</div>
+EOT;
+	}
+
+}
