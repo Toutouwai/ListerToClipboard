@@ -27,7 +27,9 @@
 		var ltc_selected = [];
 
 		// A cell in the first column of Lister results clicked
-		$(document).on('click', 'tr[data-pid] > td:first-child', function() {
+		$(document).on('click', 'tr[data-pid] > td:first-child', function(event) {
+			// Only if <td> itself was clicked
+			if(event.target !== this) return;
 			var page_id = $(this).parent().data('pid');
 			var index = ltc_selected.indexOf(page_id);
 			if(index === -1) {
