@@ -1,7 +1,7 @@
 td.ltc-selected { background-color:#eefeec; }
 #ltc-container { display:flex; flex-direction:column; width:max-content; max-width:100%; font-size:14px; line-height:17px; margin-bottom:20px; }
 .ltc-row { display:flex; align-items:center; }
-.ltc-button { padding:7px 0 7px 10px;
+.ltc-button, .PageList .ltc-button { padding:7px 0 7px 10px;
 	button { border:0; background:none; padding:0; text-align:center; width:30px; height:22px; display:block; cursor:pointer; opacity:0.5;
 		&:hover { opacity:1; }
 		i { font-size:22px; }

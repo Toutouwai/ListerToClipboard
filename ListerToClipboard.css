@@ -14,9 +14,9 @@ td.ltc-selected {
   display: flex;
   align-items: center; }
 
-.ltc-button {
+.ltc-button, .PageList .ltc-button {
   padding: 7px 0 7px 10px; }
-  .ltc-button button {
+  .ltc-button button, .PageList .ltc-button button {
     border: 0;
     background: none;
     padding: 0;
@@ -26,13 +26,13 @@ td.ltc-selected {
     display: block;
     cursor: pointer;
     opacity: 0.5; }
-    .ltc-button button:hover {
+    .ltc-button button:hover, .PageList .ltc-button button:hover {
       opacity: 1; }
-    .ltc-button button i {
+    .ltc-button button i, .PageList .ltc-button button i {
       font-size: 22px; }
-  .ltc-button #ltc-selection-clear {
+  .ltc-button #ltc-selection-clear, .PageList .ltc-button #ltc-selection-clear {
     color: #51c443; }
-  .ltc-button #ltc-selector-copy {
+  .ltc-button #ltc-selector-copy, .PageList .ltc-button #ltc-selector-copy {
     color: #2c84ca; }
 
 .ltc-value {
